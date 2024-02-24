@@ -1,0 +1,318 @@
+import React from "react";
+
+import { useEffect, useState } from "react";
+
+export default function Registration() { 
+  const [formData, setFormData] = useState({
+  dogName: "",
+  age: "",
+  breed: "",
+  size: "",
+  vaccination: "",
+  neutered: "",
+  gender: "",
+  ownerName: "",
+  email: "",
+  address: "",
+  phoneNumber: "",
+  secondContactName: "",
+  secondPhoneNumber: "",
+});
+
+const [dogs, setDogs] = useState([]);
+
+useEffect(() => {
+  getDogs();
+}, []);
+
+const getDogs = () => {
+  fetch("/api/dogs")
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Failed to fetch dogs");
+    }
+    return response.json();
+  })
+  .then((dogs) => {
+    setDogs(dogs);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+};
+
+async function handleChange(e) {
+  const { name, value } = e.target;
+  setFormData({
+    ...formData,
+    [name]: value,
+  });
+};
+
+async function handleSubmit(event) {
+  event.preventDefault();
+  try {
+    const response = await fetch("/api/dogs", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      console.log(`"${formData.dogName}" registered successfully!`);
+    } else {
+      console.error("Failed to register dog");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+
+  return (
+    <>
+  <div className="container">To Register</div>
+  <form onSubmit={handleSubmit}>
+
+  <label>
+    Dogs Name
+    <input 
+    className="form-control"
+    type="text"
+    name="dogName"
+    value={formData.dogName}
+    onChange={handleChange}
+    placeholder="Dogs Name"
+    /> 
+  </label>
+
+  <label>
+    Dogs Age
+    <input 
+    className="form-control"
+    type="text"
+    name="age"
+    value={formData.age}
+    onChange={handleChange}
+    placeholder="Dogs Age"
+    /> 
+  </label>
+
+  <label>
+    Breed
+    <input 
+    className="form-control"
+    type="text"
+    name="breed"
+    value={formData.breed}
+    onChange={handleChange}
+    placeholder="Dogs Breed"
+    /> 
+  </label>
+
+  <label>
+    Size
+    <input 
+    className="form-control"
+    type="text"
+    name="size"
+    value={formData.size}
+    onChange={handleChange}
+    placeholder="Dogs Size"
+    /> 
+  </label>
+   
+  <label>
+    Vaccination 
+    <input 
+    className="form-control"
+    type="text"
+    name="vaccination"
+    value={formData.vaccination}
+    onChange={handleChange}
+    placeholder="Dogs Vaccination"
+    /> 
+  </label>
+
+<label>
+  Neutered
+  <select
+    name="neutered"
+    value={formData.neutered}
+    onChange={handleChange}
+    >
+    <option value="">Select</option>
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+    </select>
+    </label>
+
+<label>
+  Gender
+  <select
+    name="gender"
+    value={formData.gender}
+    onChange={handleChange}
+    >
+    <option value="">Select</option>
+    <option value="female">Female</option>
+    <option value="male">Male</option>
+  </select>
+</label>
+
+<label>
+  Owner's Name
+  <input 
+    className="form-control"
+    type="text"
+    name="ownerName"
+    value={formData.ownerName}
+    onChange={handleChange}
+    placeholder="OwnersName"
+    /> 
+</label>
+
+<label>
+  email
+  <input 
+    className="form-control"
+    type="text"
+    name="email"
+    value={formData.email}
+    onChange={handleChange}
+    placeholder="email"
+    /> 
+</label>
+
+<label>
+  Address
+  <input 
+    className="form-control"
+    type="text"
+    name="address"
+    value={formData.address}
+    onChange={handleChange}
+    placeholder="address"
+    /> 
+</label>
+
+<label>
+    Phone Number
+  <input 
+    className="form-control"
+    type="text"
+    name="phoneNumber"
+    value={formData.phoneNumber}
+    onChange={handleChange}
+    placeholder="PhoneNumber"
+    /> 
+</label>
+
+<label>
+  Secondary Contact Name
+  <input 
+   className="form-control"
+   type="text"
+   name="secondContactName"
+   value={formData.secondContactName}
+   onChange={handleChange}
+   placeholder="ContactName"
+    /> 
+</label>
+
+<label>
+  Secondary Phone Number
+  <input 
+    className="form-control"
+    type="text"
+    name="secondPhoneNumber"
+    value={formData.secondPhoneNumber}
+    onChange={handleChange}
+    placeholder="PhoneNumber"
+    /> 
+</label>
+
+
+<button type="submit"
+   className="btn btn-primary">
+ <i className="fa-solid fa-paw"></i><br/>
+  Submit
+  </button>
+  </form>
+  </>
+  );
+}
+
+
+// 1. Do I need new state (data) for this? (Give it a name)
+// 2. What is the initial value for that data
+// 3. Show the  new data on the screen
+// 4. Is this data going to change? If yes when and how
+
+// Neutered
+// <input 
+//   className="form-control"
+//   type="text"
+//   name="dogsNeutered"
+//   value={formData.dogsNeutered}
+//   onChange={(e) => handleChange(e)}
+//   placeholder="Neutered"
+  
+//   /> 
+
+//Create a form to register the dogs
+// drop down / radio select for neutered
+// drop down / radio select for gender
+//radio select for Vacc and comments field
+//
+
+// paw icon
+//  <i class="fa-solid fa-paw"></i>
+
+
+// const [dogs, setDogs] = useState([]);
+
+// useEffect(() => {
+//   getDogs();
+// }, []);
+
+// const getDogs = () => {
+//   fetch("/api/dogs")
+//     .then((response) => response.json())
+//     .then((dogs) => {
+//       setDogs(dogs);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
+// const handleChange = (event) => {
+//   const { name, value } = event.target;
+//   setFormData({
+//     ...formData,
+//     [name]: value,
+//   });
+// };
+
+// async function handleSubmit(e) {
+//   e.preventDefault();
+//   try {
+//     const response = await fetch("/api/dogs", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(formData),
+//     });
+
+//     if (response.ok) {
+//       console.log(`"${formData.dogName}" registered successfully!`);
+//     } else {
+//       console.error("Failed to register dog");
+//     }
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// };
