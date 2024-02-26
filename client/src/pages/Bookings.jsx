@@ -79,11 +79,13 @@ async function handleSubmit(event) {
 
   return (
     <>
-  <div className="container">To Book</div>
-  <form onSubmit={handleSubmit} >
+      <div className="container fluid">
+      <form onSubmit={handleSubmit} className="shadow p-3 mb-5 bg-white rounded">
+      <h2>Book the snoot</h2>
   <label>
   Select Dog
   <select
+    className="form-control rounded"
     name="dogId"
     value={bookingformData.dogId}
     onChange={handleChange}
@@ -100,7 +102,7 @@ async function handleSubmit(event) {
   <label>
   Owner's Name
   <input 
-    className="form-control"
+    className="form-control rounded"
     type="text"
     name="ownerName"
     value={bookingformData.ownerName}
@@ -112,7 +114,7 @@ async function handleSubmit(event) {
 <label>
   email
   <input 
-    className="form-control"
+    className="form-control rounded"
     type="text"
     name="email"
     value={bookingformData.email}
@@ -124,7 +126,7 @@ async function handleSubmit(event) {
 <label>
   Address
   <input 
-    className="form-control"
+    className="form-control rounded"
     type="text"
     name="address"
     value={bookingformData.address}
@@ -137,6 +139,7 @@ async function handleSubmit(event) {
 <label>
   Booking Date
   <DatePicker
+  className="form-control rounded"
     selected={bookingformData.bookingDate}
     onChange={(date) =>
     setBookingFormData({
@@ -151,6 +154,7 @@ async function handleSubmit(event) {
 <label>
   Booking Time
   <select
+  className="form-control rounded"
     name="bookingTime"
     value={bookingformData.bookingTime}
     onChange={handleChange}
@@ -170,6 +174,7 @@ async function handleSubmit(event) {
   </button>
   {bookingMessage && <div>{bookingMessage}</div>}
   </form>
+  </div>
   </>
   );
 }

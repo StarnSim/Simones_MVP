@@ -1,45 +1,23 @@
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 
 h1 {
   animation: fadeIn 1.5s ease-in-out;
 }
 
-
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.header {
+  background-color: white;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  background-color: #8FBC8F;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar {
+  padding: 10px 20px;
+}
+
+.row {
+  margin-top: 80px; 
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -48,10 +26,18 @@ h1 {
   }
 }
 
-.card {
-  padding: 2em;
+@keyframes boopAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
-.read-the-docs {
-  color: #888;
+.animate-boop {
+  animation: boopAnimation 1.5s infinite; 
 }
