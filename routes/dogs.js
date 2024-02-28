@@ -44,10 +44,17 @@ router.post("/", async (req, res) => {
 });
 
 
-//UPDATE User in DB
+ //DELETE  a dog in DB for dogs
+ router.delete("/:id", async (req, res) => {
+  try {
+     const { id } = req.params;
+     await db(`DELETE FROM dogs WHERE id = ${id};`);
 
-
-//DELETE a User from the DB
+     res.status(200).send({ message: "Dog was deleted" });
+   } catch (err) {
+     res.status(500).send({ error: "Internal Server Error", details: err.message });
+   }
+ });
 
 //create a guard
 

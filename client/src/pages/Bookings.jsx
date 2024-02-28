@@ -20,6 +20,7 @@ const [bookings, setBookings] = useState([]);
 const [bookingMessage, setBookingMessage] = useState(""); 
 const [registeredDogs, setRegisteredDogs] = useState([]); // State to store registered dogs
 
+
 useEffect(() => {
   getBookings();
   getRegisteredDogs(); // Fetch registered dogs when component mounts
@@ -69,28 +70,44 @@ async function handleSubmit(event) {
     if (response.ok) {
       setBookingMessage(`Your Snoot is booked on "${bookingformData.bookingDate}" for "${bookingformData.bookingTime}"`
       );
+     
     } else {
       setBookingMessage("Failed to book");
     }
   } catch (error) {
     console.error("Error:", error);
   }
-}
+};
+
+
 
   return (
     <>
-      <div className="container fluid">
-      <form onSubmit={handleSubmit} className="shadow p-3 mb-5 bg-white rounded">
-      <h2>Book the snoot</h2>
-  <label>
-  Select Dog
+    <div className="container bg-light px-10 mb-5 d-flex flex-column align-items-center justify-content-center rounded">
+    <form
+          onSubmit={handleSubmit}
+          className="py-3 bg-white rounded d-flex flex-column align-items-center"
+          >
+
+        <h1 className="display-1 position-absolute top-50 start-50 translate-middle text-center text-white animate-boop">
+          Book Daycare
+        </h1>
+        <img
+          src="./src/assets/BTS_Images/pexels-helena-lopes-3114143.jpg"
+          style={{ height: "auto", width: "500" }}
+          className="img-fluid"
+        />
+    
+
+  
+  <label className="col-4 form-label mt-4">
   <select
     className="form-control rounded"
     name="dogId"
     value={bookingformData.dogId}
     onChange={handleChange}
   >
-  <option value="">Select a dog</option>
+  <option value="">Select your dog</option>
   {registeredDogs.map((dog) => (
   <option key={dog.id} value={dog.id}>
     {dog.dogName}
@@ -99,8 +116,8 @@ async function handleSubmit(event) {
   </select>
   </label>
 
-  <label>
-  Owner's Name
+  <label className="col-4 form-label mt-4">
+  
   <input 
     className="form-control rounded"
     type="text"
@@ -111,8 +128,8 @@ async function handleSubmit(event) {
     /> 
 </label>
 
-<label>
-  email
+<label className="col-4 form-label mt-4">
+  
   <input 
     className="form-control rounded"
     type="text"
@@ -123,21 +140,21 @@ async function handleSubmit(event) {
     /> 
 </label>
 
-<label>
-  Address
+<label className="col-4 form-label mt-4">
+  
   <input 
     className="form-control rounded"
     type="text"
     name="address"
     value={bookingformData.address}
     onChange={handleChange}
-    placeholder="address"
+    placeholder="Address"
     /> 
 </label>
 
 
-<label>
-  Booking Date
+<label className="col-4 form-label mt-4">
+  
   <DatePicker
   className="form-control rounded"
     selected={bookingformData.bookingDate}
@@ -151,8 +168,8 @@ async function handleSubmit(event) {
   />
 </label>
 
-<label>
-  Booking Time
+<label className="col-4 form-label mt-4">
+  
   <select
   className="form-control rounded"
     name="bookingTime"
@@ -166,98 +183,16 @@ async function handleSubmit(event) {
   </select>
 </label>
 
-
+<div className="mt-4 text-center">
 <button type="submit"
-   className="btn btn-primary">
+   className="btn btn-success">
  <i className="fa-solid fa-paw"></i><br/>
-  Book the Snoot
+ Boop to Submit
   </button>
+  </div>
   {bookingMessage && <div>{bookingMessage}</div>}
   </form>
-  </div>
+  </div>  
   </>
   );
 }
-
-
-
-
-
-// import React from "react";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
-
-// import { useEffect, useState } from "react";
-
-
-// export default function Bookings() { 
-//   const [bookingformData, setBookingFormData] = useState({
-//   dogName: "",
-//   ownerName: "",
-//   email: "",
-//   address: "",
-//   phoneNumber: "",
-//   bookingTime: "",
-//   bookingDate: null,
-// });
-
-// const [dogs, setDogs] = useState([]);
-
-// useEffect(() => {
-//   getDogs();
-//   getBookings();
-// }, []);
-
-// const getDogs = () => {
-//   fetch("/api/dogs")
-//     .then((response) => response.json())
-//     .then((dogs) => {
-//       setDogs(dogs);
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// };
-
-// const [bookings, setBookings] = useState([]);
-
-// const getBookings = () => {
-//   fetch("/api/bookings")
-//     .then((response) => response.json())
-//     .then((bookings) => {
-//       setBookings(bookings);
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// };
-
-// const handleChange = (event) => {
-//   const { name, value } = event.target;
-//   setBookingFormData({
-//     ...bookingformData,
-//     [name]: value,
-//   });
-// };
-
-// async function handleSubmit(e) {
-//   e.preventDefault();
-//   try {
-//     const response = await fetch("/api/bookings", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(bookingformData),
-//     });
-
-//     if (response.ok) {
-//       console.log(`"${bookingformData.dogName}" is booked in on "${bookingformData.bookingDate}" for a "${bookingformData.bookingTime}"`);
-//     } else {
-//       console.error("Failed to book");
-//     }
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// };
-

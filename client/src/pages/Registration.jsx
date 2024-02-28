@@ -19,9 +19,11 @@ export default function Registration() {
   });
 
   const [dogs, setDogs] = useState([]);
+  const [registrationMessage, setRegistrationMessage] = useState("");
 
   useEffect(() => {
     getDogs();
+    
   }, []);
 
   const getDogs = () => {
@@ -60,24 +62,34 @@ export default function Registration() {
       });
 
       if (response.ok) {
-        console.log(`"${formData.dogName}" registered successfully!`);
+        setRegistrationMessage(`"${formData.dogName}" has been registered successfully!`);
+      
       } else {
-        console.error("Failed to register dog");
+        setRegistrationMessage("Failed to register dog");
       }
     } catch (error) {
-      console.error("Error:", error);
+      setRegistrationMessage("Error:", error);
     }
   }
 
   return (
     <>
-      <div className="container bg-light px-10 mb-5">
+      <div className="container bg-light px-10 mb-5 rounded">
         <form
           onSubmit={handleSubmit}
           className="shadow  mb-5 py-3  bg-white rounded row"
         >
+          <h1 className="display-1 position-absolute top-50 start-50 translate-middle text-center text-white">
+          Register your Dog
+        </h1>
+        <img
+          src="./src/assets/BTS_Images/pexels-johann-1254140.jpg"
+          style={{ height: "auto", width: "500" }}
+          className="img-fluid"
+        />
+
+
           <label className="col-4 form-label mt-4">
-            Dogs Name
             <input
               className="form-control rounded"
               type="text"
@@ -89,7 +101,6 @@ export default function Registration() {
           </label>
 
           <label className="col-4 form-label mt-4">
-            Dogs Age
             <input
               className="form-control rounded"
               type="text"
@@ -101,7 +112,6 @@ export default function Registration() {
           </label>
 
           <label className="col-4 form-label mt-4">
-            Breed
             <input
               className="form-control rounded"
               type="text"
@@ -113,7 +123,6 @@ export default function Registration() {
           </label>
 
           <label className="col-4 form-label mt-4">
-            Size
             <input
               className="form-control rounded"
               type="text"
@@ -125,7 +134,6 @@ export default function Registration() {
           </label>
 
           <label className="col-4 form-label mt-4">
-            Vaccination
             <input
               className="form-control rounded"
               type="text"
@@ -137,35 +145,32 @@ export default function Registration() {
           </label>
 
           <label className="col-4 form-label mt-4">
-            Neutered
             <select
               className="form-control rounded"
               name="neutered"
               value={formData.neutered}
               onChange={handleChange}
             >
-              <option value="">Select</option>
+              <option value="">Neutered</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
           </label>
 
           <label className="col-4 form-label mt-4">
-            Gender
             <select
               className="form-control rounded"
               name="gender"
               value={formData.gender}
               onChange={handleChange}
             >
-              <option value="">Select</option>
+              <option value=""> Gender</option>
               <option value="female">Female</option>
               <option value="male">Male</option>
             </select>
           </label>
 
           <label className="col-4 form-label mt-4">
-            Owner's Name
             <input
               className="form-control rounded"
               type="text"
@@ -177,7 +182,6 @@ export default function Registration() {
           </label>
 
           <label className="col-4 form-label mt-4">
-            email
             <input
               className="form-control rounded"
               type="text"
@@ -189,59 +193,57 @@ export default function Registration() {
           </label>
 
           <label className="col-4 form-label mt-4">
-            Address
             <input
               className="form-control rounded"
               type="text"
               name="address"
               value={formData.address}
               onChange={handleChange}
-              placeholder="address"
+              placeholder="Address"
             />
           </label>
 
           <label className="col-4 form-label mt-4">
-            Phone Number
             <input
               className="form-control rounded"
               type="text"
               name="phoneNumber"
               value={formData.phoneNumber}
               onChange={handleChange}
-              placeholder="PhoneNumber"
+              placeholder="Phone Number"
             />
           </label>
 
           <label className="col-4 form-label mt-4">
-            Secondary Contact Name
             <input
               className="form-control rounded"
               type="text"
               name="secondContactName"
               value={formData.secondContactName}
               onChange={handleChange}
-              placeholder="ContactName"
+              placeholder="Secondary Contact Name"
             />
           </label>
 
           <label className="col-4 form-label mt-4">
-            Secondary Phone Number
             <input
               className="form-control rounded"
               type="text"
               name="secondPhoneNumber"
               value={formData.secondPhoneNumber}
               onChange={handleChange}
-              placeholder="PhoneNumber"
+              placeholder="Secondary Phone Number"
             />
           </label>
 
-          <div className="col-4 mt-4">
-            <button type="submit" className="btn btn-primary">
-              <i className="fa-solid fa-paw"></i>
-              Submit
-            </button>
-          </div>
+          <div className="mt-4 text-center">
+         <button type="submit"
+          className="btn btn-success">
+           <i className="fa-solid fa-paw"></i><br/>
+            Boop to Submit
+           </button>
+            </div>
+            {registrationMessage && <div>{registrationMessage}</div>}
         </form>
       </div>
     </>
@@ -252,3 +254,6 @@ export default function Registration() {
 // 2. What is the initial value for that data
 // 3. Show the  new data on the screen
 // 4. Is this data going to change? If yes when and how
+
+
+//move to component

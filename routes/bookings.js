@@ -38,8 +38,23 @@ router.post("/", async(req, res) => {
    }
  });
 
+ //DELETE  a booking in DB for bookings
+router.delete("/:id", async (req, res) => {
+  try {
+     const { id } = req.params;
+     await db(`DELETE FROM bookings WHERE id = ${id};`);
+
+     res.status(200).send({ message: "Booking was deleted" });
+   } catch (err) {
+     res.status(500).send({ error: "Internal Server Error", details: err.message });
+   }
+ });
+
+
 module.exports = router;
 
 //INSERT INTO bookings (dogId, bookingDate, bookingTime) VALUES (1,'2024-02-21', 'HalfDayAM');
 //INSERT INTO bookings (dogId, bookingDate, bookingTime) VALUES (2,'2024-02-21', 'HalfDayPM');
 //INSERT INTO bookings (dogId, bookingDate, bookingTime) VALUES (3,'2024-02-21', 'FullDay');
+
+

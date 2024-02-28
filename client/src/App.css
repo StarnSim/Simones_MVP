@@ -1,15 +1,42 @@
 
 
 h1 {
-  animation: fadeIn 1.5s ease-in-out;
+  animation: boop 1.5s ease-in-out, 
+  snoot 2s ease-in-out 2s;
 }
 
-.header {
-  background-color: white;
+@keyframes boop {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes snoot {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   background-color: #8FBC8F;
+  background-image: url('./src/assets/BTS_Images/127-4032x2272.jpg');
+  background-size: cover; 
+  background-position: center;
+
+}
+.green-text {
+  color: green;
+  font-weight: bold;
 }
 
 .navbar {
@@ -17,27 +44,47 @@ body {
 }
 
 .row {
-  margin-top: 80px; 
+  margin-top: 20px; 
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.popup-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes boopAnimation {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+.schedule-header {
+  color: green;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 auto;
+}
+.schedule-form {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fff;
 }
 
-.animate-boop {
-  animation: boopAnimation 1.5s infinite; 
+.schedule-list {
+  list-style-type: none;
+  padding: 5;
+}
+
+.booking-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
 }
