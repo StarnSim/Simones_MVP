@@ -11,6 +11,7 @@ This full-stack MVP is a dog daycare management app designed to facilitate regis
 - React (^18.2.0)
 - HTML5
 - CSS3
+- Bootstap
 - JavaScript (ES6)
 - ReactRouter (^6.14.2)
 - MySQL (8.3.0)
